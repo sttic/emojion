@@ -1,27 +1,63 @@
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { GiftedChat, Bubble } from "react-native-gifted-chat";
+import KeyboardSpacer from "react-native-keyboard-spacer";
 
-export default function LinksScreen() {
-  return (
-    <ScrollView style={styles.container}>
-      {/**
-       * Go ahead and delete ExpoLinksView and replace it with your content;
-       * we just wanted to provide you with some helpful links.
-       */}
-      <ExpoLinksView />
-    </ScrollView>
-  );
+export default class LinksScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      messages: []
+    };
+
+    this.onSend = this.onSend.bind(this);
+  }
+
+  onSend(messages = []) {
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages)
+    }));
+  }
+
+  renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: "#4db8c7"
+          }
+        }}
+      />
+    );
+  }
+
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={messages => this.onSend(messages)}
+          user={{
+            _id: 1
+          }}
+          renderBubble={this.renderBubble}
+        />
+        <KeyboardSpacer topSpacing={-50} />
+      </View>
+    );
+  }
 }
 
 LinksScreen.navigationOptions = {
-  title: 'Links',
+  title: "Links"
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: "#fff"
+  }
 });
