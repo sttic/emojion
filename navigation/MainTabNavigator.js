@@ -5,6 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
+import ChatScreen from '../screens/ChatScreen'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -14,6 +15,7 @@ const config = Platform.select({
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
+    Chat: ChatScreen
   },
   config
 );

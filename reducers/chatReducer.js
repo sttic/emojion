@@ -9,6 +9,8 @@ const initialState = {
       user: {
         id: 2,
         name: 'Rex & Jen E.',
+        avatar: require('../assets/images/doggos/dog2.jpg'),
+        avatar2: require('../assets/images/users/max.jpg'),
         username: 'mrs_meowmers'
       }
     }
@@ -21,6 +23,8 @@ const initialState = {
       user: {
         id: 2,
         name: 'Doodles & Ellen L.',
+        avatar: require('../assets/images/doggos/dog4.jpg'),
+        avatar2: require('../assets/images/users/ssteve.jpg'),
         username: 'mr_meowmers'
       }
     }
@@ -34,6 +38,8 @@ const initialState = {
       user: {
         id: 2,
         name: 'Cloud & Megan H.',
+        avatar: require('../assets/images/doggos/dog6.jpg'),
+        avatar2: require('../assets/images/users/bob.png'),
         username: 'shiba_inu'
       }
     }

@@ -1,198 +1,180 @@
-import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React from "react";
 import {
   Image,
   Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
-} from 'react-native';
+  Text,
+  ScrollView,
+  StyleSheet
+} from "react-native";
+import { List } from "native-base";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import Icon from "react-native-vector-icons/Ionicons";
 
-import { MonoText } from '../components/StyledText';
+import MessageListItem from "../components/MessageListItem";
 
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
+import { connect } from "react-redux";
+import { sendMessage } from "../actions/actions";
 
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
+class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-          <Text style={styles.getStartedText}>Get started by opening</Text>
+  orderedMessages() {
+    let messages = this.props.chat;
+    return Object.keys(messages)
+      .map(key => messages[key][0])
+      .sort((a, b) => a.createdAt < b.createdAt);
+  }
 
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
+  render() {
+    return (
+      <View style={{ flex: 1, paddingTop: 20 }}>
+        <ScrollView style={styles.container}>
+          <Text
+            style={{
+              paddingTop: 50,
+              textAlign: "center",
+              fontSize: 32,
+              fontWeight: "bold"
+            }}
+          >
+            EMOJION
+          </Text>
+
+          <View style={styles.logoContainer}>
+            <TouchableOpacity>
+              <Image
+                style={styles.logo}
+                source={require("../assets/images/jen.png")}
+              />
+              <View
+                style={{
+                  alignItems: "center",
+                  width: 42,
+                  height: 42,
+                  position: "absolute",
+                  right: -8,
+                  bottom: -8,
+                  backgroundColor: "lightgrey",
+                  borderRadius: 26
+                }}
+              >
+                <Icon
+                  name={Platform.OS === "ios" ? "ios-camera" : "md-camera"}
+                  size={24}
+                  color="white"
+                  style={{ paddingTop: 8 }}
+                />
+              </View>
+            </TouchableOpacity>
           </View>
 
-          <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
+          <List>
+            {this.orderedMessages().map((messenger, index) => (
+              <TouchableOpacity
+                key={`${index}${JSON.stringify(messenger)}`}
+                onPress={() =>
+                  this.props.navigation.navigate("Chat", {
+                    username: messenger.user.username,
+                    name: messenger.user.name,
+                    avatar: messenger.user.avatar,
+                    avatar2: messenger.user.avatar2,
+                    lastMessage: messenger.text,
+                    lastDate: messenger.createdAt
+                  })
+                }
+              >
+                <MessageListItem
+                  largeAvatar={messenger.user.avatar}
+                  smallAvatar={messenger.user.avatar2}
+                  name={messenger.user.name}
+                  date={messenger.createdAt}
+                  message={messenger.text}
+                />
+              </TouchableOpacity>
+            ))}
+          </List>
+        </ScrollView>
       </View>
-    </View>
-  );
-}
-
-HomeScreen.navigationOptions = {
-  header: null,
-};
-
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
     );
   }
 }
 
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/development-mode/'
-  );
-}
+HomeScreen.navigationOptions = {
+  header: null
+};
 
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  );
-}
+const mapStateToProps = state => ({
+  chat: state.chat
+});
+
+export default connect(
+  mapStateToProps,
+  { sendMessage }
+)(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    padding: 20,
+    paddingHorizontal: 30
   },
-  developmentModeText: {
+  input: {
+    height: 55,
+    backgroundColor: "#eee",
     marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+    color: "#000",
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#fff"
   },
-  contentContainer: {
-    paddingTop: 30,
+  label: {
+    color: "black",
+    paddingHorizontal: 10,
+    paddingBottom: 5
   },
-  welcomeContainer: {
-    alignItems: 'center',
+  inputIcon: {
+    position: "absolute",
+    top: 37,
+    right: 18,
+    zIndex: 1,
+    opacity: 0.5,
+    color: "green"
+  },
+  buttonContainer: {
     marginTop: 10,
-    marginBottom: 20,
+    paddingTop: 15,
+    paddingBottom: 15,
+    backgroundColor: "#4db8c7",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#fff"
   },
-  welcomeImage: {
+  buttonContainerDisabled: {
+    marginTop: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
+    backgroundColor: "#4db8c7",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#fff",
+    opacity: 0.5
+  },
+  buttonText: {
+    textAlign: "center",
+    color: "#FFFFFF"
+  },
+  logoContainer: {
+    alignItems: "center",
+    flexGrow: 1,
+    justifyContent: "center",
+    marginVertical: 30
+  },
+  logo: {
     width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+    height: 100,
+    borderRadius: 50
+  }
 });
