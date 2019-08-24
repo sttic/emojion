@@ -1,0 +1,15 @@
+{
+	"auth": {
+		"emojion323a3e0a": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"predictions": {
+		"interpretText1d6cdd36": {
+			"providerPlugin": "awscloudformation",
+			"service": "Comprehend",
+			"interpretType": "interpretText"
+		}
+	}
+}
