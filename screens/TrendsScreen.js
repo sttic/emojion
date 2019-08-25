@@ -1,5 +1,5 @@
 import React from 'react';
-import { Picker, View, Text, StyleSheet } from 'react-native';
+import { Picker, View, Text, StyleSheet, ScrollView } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import LineGraph from '../components/LineGraph';
 import Colors from '../constants/Colors';
@@ -17,60 +17,60 @@ export default class TrendsScreen extends React.Component {
     };
 
     this.positiveData = [
-      { x: 'Jan', y: 45 },
-      { x: 'Feb', y: 67 },
-      { x: 'Mar', y: 94 },
-      { x: 'Apr', y: 145 },
-      { x: 'May', y: 177 },
-      { x: 'Jun', y: 177 },
-      { x: 'Jul', y: 177 },
-      { x: 'Aug', y: 177 },
-      { x: 'Sep', y: 177 },
-      { x: 'Oct', y: 177 },
-      { x: 'Nov', y: 177 },
-      { x: 'Dec', y: 177 }
+      { x: 'Jan', y: 0.66 },
+      { x: 'Feb', y: 0.72 },
+      { x: 'Mar', y: 0.55 },
+      { x: 'Apr', y: 0.78 },
+      { x: 'May', y: 0.80 },
+      { x: 'Jun', y: 0.71 },
+      { x: 'Jul', y: 0.64 },
+      { x: 'Aug', y: 0.83 },
+      { x: 'Sep', y: 0.86 },
+      { x: 'Oct', y: 0.79 },
+      { x: 'Nov', y: 0.88 },
+      { x: 'Dec', y: 0.85 }
     ];
     this.negativeData = [
-      { x: 'Jan', y: 42 },
-      { x: 'Feb', y: 42 },
-      { x: 'Mar', y: 42 },
-      { x: 'Apr', y: 42 },
-      { x: 'May', y: 42 },
-      { x: 'Jun', y: 42 },
-      { x: 'Jul', y: 42 },
-      { x: 'Aug', y: 42 },
-      { x: 'Sep', y: 42 },
-      { x: 'Oct', y: 42 },
-      { x: 'Nov', y: 42 },
-      { x: 'Dec', y: 42 }
+      { x: 'Jan', y: 0.44 },
+      { x: 'Feb', y: 0.41 },
+      { x: 'Mar', y: 0.32 },
+      { x: 'Apr', y: 0.38 },
+      { x: 'May', y: 0.38 },
+      { x: 'Jun', y: 0.31 },
+      { x: 'Jul', y: 0.27 },
+      { x: 'Aug', y: 0.33 },
+      { x: 'Sep', y: 0.25 },
+      { x: 'Oct', y: 0.33 },
+      { x: 'Nov', y: 0.28 },
+      { x: 'Dec', y: 0.24 }
     ];
     this.mixedData = [
-      { x: 'Jan', y: 30 },
-      { x: 'Feb', y: 200 },
-      { x: 'Mar', y: 170 },
-      { x: 'Apr', y: 250 },
-      { x: 'May', y: 10 },
-      { x: 'Jun', y: 10 },
-      { x: 'Jul', y: 10 },
-      { x: 'Aug', y: 10 },
-      { x: 'Sep', y: 10 },
-      { x: 'Oct', y: 10 },
-      { x: 'Nov', y: 10 },
-      { x: 'Dec', y: 10 }
+      { x: 'Jan', y: 0.34 },
+      { x: 'Feb', y: 0.50 },
+      { x: 'Mar', y: 0.45 },
+      { x: 'Apr', y: 0.41 },
+      { x: 'May', y: 0.48 },
+      { x: 'Jun', y: 0.41 },
+      { x: 'Jul', y: 0.46 },
+      { x: 'Aug', y: 0.42 },
+      { x: 'Sep', y: 0.47 },
+      { x: 'Oct', y: 0.42 },
+      { x: 'Nov', y: 0.40 },
+      { x: 'Dec', y: 0.45 }
     ];
     this.neutralData = [
-      { x: 'Jan', y: 20 },
-      { x: 'Feb', y: 100 },
-      { x: 'Mar', y: 140 },
-      { x: 'Apr', y: 550 },
-      { x: 'May', y: 40 },
-      { x: 'Jun', y: 40 },
-      { x: 'Jul', y: 40 },
-      { x: 'Aug', y: 40 },
-      { x: 'Sep', y: 40 },
-      { x: 'Oct', y: 40 },
-      { x: 'Nov', y: 40 },
-      { x: 'Dec', y: 40 }
+      { x: 'Jan', y: 0.45 },
+      { x: 'Feb', y: 0.47 },
+      { x: 'Mar', y: 0.41 },
+      { x: 'Apr', y: 0.50 },
+      { x: 'May', y: 0.42 },
+      { x: 'Jun', y: 0.56 },
+      { x: 'Jul', y: 0.47 },
+      { x: 'Aug', y: 0.52 },
+      { x: 'Sep', y: 0.57 },
+      { x: 'Oct', y: 0.69 },
+      { x: 'Nov', y: 0.62 },
+      { x: 'Dec', y: 0.66 }
     ];
   }
 
@@ -79,21 +79,48 @@ export default class TrendsScreen extends React.Component {
       case 'Daily':
         return (
           <View style={{ paddingHorizontal: 20 }}>
+            <Text style={{ alignSelf: 'center' }}>
+              {new Date().toUTCString().substr(0, 16)}
+            </Text>
             <Text style={styles.title2}>Predominant sentiment: </Text>
             <Text style={styles.title3}>POSITIVE</Text>
-            <Text>Positive: 0.47</Text>
+            <Text>Positive: 0.47 %</Text>
             <ProgressBar progress={0.47} color={'#4dbed8'} />
-            <Text>Negative: 0.2</Text>
+            <Text>Negative: 0.2 %</Text>
             <ProgressBar progress={0.2} color={'#4dbed8'} />
-            <Text>Neutral: 0.34</Text>
+            <Text>Neutral: 0.34 %</Text>
             <ProgressBar progress={0.34} color={'#4dbed8'} />
-            <Text>Mixed: 0.17</Text>
+            <Text>Mixed: 0.17 %</Text>
             <ProgressBar progress={0.17} color={'#4dbed8'} />
           </View>
         );
       case 'Yearly':
         return (
           <View>
+            <Text
+              style={{
+                fontSize: 18,
+                color: 'rgba(96,100,109, 1)',
+                lineHeight: 24,
+                textAlign: 'center'
+              }}
+            >
+              Your yearly predominant sentiment
+            </Text>
+            <Text
+              style={{
+                fontSize: 18,
+                lineHeight: 24,
+                textAlign: 'center',
+                marginBottom: 15,
+                color: Colors.secondary
+              }}
+            >
+              POSITIVE
+            </Text>
+            <Text style={{ textAlign: 'center', marginBottom: 8 }}>
+              Relative sentiment scores
+            </Text>
             <LineGraph
               data={[
                 {
@@ -150,26 +177,29 @@ export default class TrendsScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Picker
-          selectedValue={this.state.period}
-          style={{
-            marginTop: 16,
-            marginBottom: 16,
-            alignSelf: 'center',
-            height: 50,
-            width: 200
-          }}
-          onValueChange={itemValue => this.setState({ period: itemValue })}
-        >
-          {this.state.options.map(option => (
-            <Picker.Item
-              key={option.value}
-              label={option.label}
-              value={option.value}
-            />
-          ))}
-        </Picker>
-        {this.showGraph()}
+        <ScrollView>
+          <View style={{ marginVertical: 16 }}>
+            <Picker
+              selectedValue={this.state.period}
+              style={{
+                marginBottom: 16,
+                alignSelf: 'center',
+                height: 50,
+                width: 200
+              }}
+              onValueChange={itemValue => this.setState({ period: itemValue })}
+            >
+              {this.state.options.map(option => (
+                <Picker.Item
+                  key={option.value}
+                  label={option.label}
+                  value={option.value}
+                />
+              ))}
+            </Picker>
+            {this.showGraph()}
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -209,7 +239,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 24,
     textAlign: 'center',
-    marginBottom: 15
+    marginBottom: 15,
+    color: Colors.secondary
   },
   msg: {
     borderColor: '#4dbed8',

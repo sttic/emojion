@@ -31,8 +31,8 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? 'ios-apps'
-          : 'md-apps'
+          ? 'ios-home'
+          : 'md-home'
       }
     />
   ),
@@ -52,17 +52,24 @@ DemoStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === 'ios' ? 'ios-code' : 'md-code'}
     />
   )
 };
 
 DemoStack.path = '';
 
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  DemoStack
-});
+const tabNavigator = createBottomTabNavigator(
+  {
+    HomeStack,
+    DemoStack
+  },
+  {
+    tabBarOptions: {
+      showLabel: false
+    }
+  }
+);
 
 tabNavigator.path = '';
 

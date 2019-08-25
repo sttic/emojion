@@ -36,7 +36,7 @@ export default function DemoScreen() {
   return (
     <View style={styles.container}>
       <ScrollView
-        style={styles.container}
+        style={{ paddingHorizontal: 40 }}
         contentContainerStyle={styles.contentContainer}
       >
         <View style={styles.welcomeContainer}>
@@ -68,8 +68,7 @@ DemoScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingHorizontal: 20
+    backgroundColor: '#fff'
   },
   contentContainer: {
     paddingTop: 80

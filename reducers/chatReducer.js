@@ -29,7 +29,7 @@ const initialState = {
   ],
   shiba_inu: [
     {
-      _id: 2,
+      _id: 12,
       createdAt: new Date(2019, 6, 6, 14, 26, 51),
       text:
         "Hey! Are we still meeting at the park in an hour? I'll bring the treats!",

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Predictions } from 'aws-amplify';
 import { ProgressBar } from 'react-native-paper';
+import Colors from '../constants/Colors';
 
 export default function MsgScreen(props) {
   const msg = props.navigation.getParam('msg');
@@ -167,7 +168,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 24,
     textAlign: 'center',
-    marginBottom: 15
+    marginBottom: 15,
+    color: Colors.secondary
   },
   msg: {
     borderColor: '#4dbed8',
