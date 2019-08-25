@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import PureChart from 'react-native-pure-chart';
 
 export function LineGraph(props) {
   return (
-    <View style={{ flex: 1 }}>
-      <Text>this is a line graph</Text>
-    </View>
+    <PureChart
+      data={props.data}
+      type='line'
+      numberOfYAxisGuideLine={1}
+      height={256}
+    />
   );
 }
 

@@ -12,4 +12,10 @@ export default {
   warningText: '#666804',
   noticeBackground: tintColor,
   noticeText: '#fff',
+  sentiment: {
+    positive: '#4ab56a',
+    negative: '#bc4364',
+    mixed: '#4dbed8',
+    neutral: 'grey'
+  }
 };
