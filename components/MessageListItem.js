@@ -74,7 +74,6 @@ const smallAvatar = {
 };
 
 MessageListItem.propTypes = {
-  largeAvatar: PropTypes.number.isRequired,
   smallAvatar: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date),

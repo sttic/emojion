@@ -47,27 +47,8 @@ class HomeScreen extends React.Component {
             <TouchableOpacity>
               <Image
                 style={styles.logo}
-                source={require("../assets/images/jen.png")}
+                source={require("../assets/images/users/max.jpg")}
               />
-              <View
-                style={{
-                  alignItems: "center",
-                  width: 42,
-                  height: 42,
-                  position: "absolute",
-                  right: -8,
-                  bottom: -8,
-                  backgroundColor: "lightgrey",
-                  borderRadius: 26
-                }}
-              >
-                <Icon
-                  name={Platform.OS === "ios" ? "ios-camera" : "md-camera"}
-                  size={24}
-                  color="white"
-                  style={{ paddingTop: 8 }}
-                />
-              </View>
             </TouchableOpacity>
           </View>
 

@@ -8,9 +8,8 @@ const initialState = {
       text: 'Hi! Cute dog! When is your dog available for play time?',
       user: {
         id: 2,
-        name: 'Rex & Jen E.',
-        avatar: require('../assets/images/doggos/dog2.jpg'),
-        avatar2: require('../assets/images/users/max.jpg'),
+        name: 'Rex',
+        avatar2: require('../assets/images/users/Will_S3.png'),
         username: 'mrs_meowmers'
       }
     }
@@ -22,9 +21,8 @@ const initialState = {
       text: 'Good evening! Would you like to head to the circle park now?',
       user: {
         id: 2,
-        name: 'Doodles & Ellen L.',
-        avatar: require('../assets/images/doggos/dog4.jpg'),
-        avatar2: require('../assets/images/users/ssteve.jpg'),
+        name: 'David',
+        avatar2: require('../assets/images/users/tommy.jpg'),
         username: 'mr_meowmers'
       }
     }
@@ -37,9 +35,8 @@ const initialState = {
         "Hey! Are we still meeting at the park in an hour? I'll bring the treats!",
       user: {
         id: 2,
-        name: 'Cloud & Megan H.',
-        avatar: require('../assets/images/doggos/dog6.jpg'),
-        avatar2: require('../assets/images/users/bob.png'),
+        name: 'Jen',
+        avatar2: require('../assets/images/users/ellen.jpg'),
         username: 'shiba_inu'
       }
     }
