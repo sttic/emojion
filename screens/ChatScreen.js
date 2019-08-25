@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import KeyboardSpacer from "react-native-keyboard-spacer";
+import Colors from "../constants/Colors";
 
 export default class ChatScreen extends React.Component {
   constructor(props) {
@@ -20,6 +21,60 @@ export default class ChatScreen extends React.Component {
     };
   }
 
+  componentWillMount() {
+    this.setState({
+      messages: [
+        {
+          _id: 5,
+          text: ":((",
+          createdAt: new Date(),
+          user: {
+            _id: 1,
+            name: "Me",
+          }
+        },
+        {
+          _id: 4,
+          text: "cause aws is spying on me",
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: "Lisa Chan",
+            avatar: "http://placekitten.com/128/128"
+          }
+        },
+        {
+          _id: 3,
+          text: "why?",
+          createdAt: new Date(),
+          user: {
+            _id: 1,
+            name: "Me",
+          }
+        },
+        {
+          _id: 2,
+          text: "me too thanks",
+          createdAt: new Date(),
+          user: {
+            _id: 1,
+            name: "Me",
+          }
+        },
+        {
+          _id: 1,
+          text: "I want to kms",
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: "Lisa Chan",
+            avatar: "http://placekitten.com/128/128"
+          }
+        }
+      ]
+    });
+  }
+
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages)
@@ -32,7 +87,7 @@ export default class ChatScreen extends React.Component {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: "#4db8c7"
+            backgroundColor: Colors.primary
           }
         }}
       />

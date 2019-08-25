@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { ListItem, Left, Body, Thumbnail, Text } from 'native-base';
 
 export default function MessageListItem(props) {
   return (
     <ListItem avatar>
       <Left style={{ width: 64 }}>
-        <Thumbnail />
-        <Image source={props.largeAvatar} style={largeAvatar} />
-        <Image source={props.smallAvatar} style={smallAvatar} />
+        <Thumbnail source={props.smallAvatar} />
       </Left>
       <Body>
         <View

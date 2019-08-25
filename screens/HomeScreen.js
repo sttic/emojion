@@ -117,54 +117,9 @@ export default connect(
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    paddingHorizontal: 30
-  },
-  input: {
-    height: 55,
-    backgroundColor: "#eee",
+    marginTop: 20,
     marginBottom: 20,
-    color: "#000",
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#fff"
-  },
-  label: {
-    color: "black",
-    paddingHorizontal: 10,
-    paddingBottom: 5
-  },
-  inputIcon: {
-    position: "absolute",
-    top: 37,
-    right: 18,
-    zIndex: 1,
-    opacity: 0.5,
-    color: "green"
-  },
-  buttonContainer: {
-    marginTop: 10,
-    paddingTop: 15,
-    paddingBottom: 15,
-    backgroundColor: "#4db8c7",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#fff"
-  },
-  buttonContainerDisabled: {
-    marginTop: 10,
-    paddingTop: 15,
-    paddingBottom: 15,
-    backgroundColor: "#4db8c7",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#fff",
-    opacity: 0.5
-  },
-  buttonText: {
-    textAlign: "center",
-    color: "#FFFFFF"
+    marginRight: 16
   },
   logoContainer: {
     alignItems: "center",
