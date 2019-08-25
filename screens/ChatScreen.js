@@ -1,8 +1,8 @@
-import React from "react";
-import { View } from "react-native";
-import { GiftedChat, Bubble } from "react-native-gifted-chat";
-import KeyboardSpacer from "react-native-keyboard-spacer";
-import Colors from "../constants/Colors";
+import React from 'react';
+import { View } from 'react-native';
+import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+import Colors from '../constants/Colors';
 
 export default class ChatScreen extends React.Component {
   constructor(props) {
@@ -26,49 +26,49 @@ export default class ChatScreen extends React.Component {
       messages: [
         {
           _id: 5,
-          text: ":((",
+          text: ':((',
           createdAt: new Date(),
           user: {
             _id: 1,
-            name: "Me",
+            name: 'Me'
           }
         },
         {
           _id: 4,
-          text: "cause aws is spying on me",
+          text: 'cause aws is spying on me',
           createdAt: new Date(),
           user: {
             _id: 2,
-            name: "Lisa Chan",
-            avatar: "http://placekitten.com/128/128"
+            name: 'Lisa Chan',
+            avatar: 'http://placekitten.com/128/128'
           }
         },
         {
           _id: 3,
-          text: "why?",
+          text: 'why?',
           createdAt: new Date(),
           user: {
             _id: 1,
-            name: "Me",
+            name: 'Me'
           }
         },
         {
           _id: 2,
-          text: "me too thanks",
+          text: 'me too thanks',
           createdAt: new Date(),
           user: {
             _id: 1,
-            name: "Me",
+            name: 'Me'
           }
         },
         {
           _id: 1,
-          text: "I want to kms",
+          text: 'I want to kms',
           createdAt: new Date(),
           user: {
             _id: 2,
-            name: "Lisa Chan",
-            avatar: "http://placekitten.com/128/128"
+            name: 'Lisa Chan',
+            avatar: 'http://placekitten.com/128/128'
           }
         }
       ]
@@ -93,7 +93,7 @@ export default class ChatScreen extends React.Component {
       />
     );
   }
-
+  
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -104,6 +104,9 @@ export default class ChatScreen extends React.Component {
             _id: 1
           }}
           renderBubble={this.renderBubble}
+          onLongPress={(ctx, currentMessage) => this.props.navigation.navigate('MsgSent', {
+              msg: currentMessage.text
+            })}
         />
         <KeyboardSpacer topSpacing={-50} />
       </View>
