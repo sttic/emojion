@@ -3,7 +3,7 @@ import { SEND_MESSAGE, GET_MESSAGES } from '../actions/types';
 const initialState = {
   mrs_meowmers: [
     {
-      _id: 1,
+      _id: 0,
       createdAt: new Date(2019, 6, 6, 9, 39, 30),
       text: 'Hi! Cute dog! When is your dog available for play time?',
       user: {
@@ -17,7 +17,7 @@ const initialState = {
   ],
   mr_meowmers: [
     {
-      _id: 1,
+      _id: 0,
       createdAt: new Date(2019, 6, 6, 15, 43, 23),
       text: 'Good evening! Would you like to head to the circle park now?',
       user: {
@@ -31,7 +31,7 @@ const initialState = {
   ],
   shiba_inu: [
     {
-      _id: 1,
+      _id: 0,
       createdAt: new Date(2019, 6, 6, 18, 26, 51),
       text:
         "Hey! Are we still meeting at the park in an hour? I'll bring the treats!",
