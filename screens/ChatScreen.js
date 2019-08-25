@@ -1,7 +1,12 @@
 import React from 'react';
+<<<<<<< HEAD
 import { Platform, View, TouchableOpacity } from 'react-native';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
 import Icon from 'react-native-vector-icons/Ionicons';
+=======
+import { View } from 'react-native';
+import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+>>>>>>> 61f1f8a404c18ccdce8c3ddc2be27817dbf781a7
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Colors from '../constants/Colors';
 
@@ -80,7 +85,7 @@ class ChatScreen extends React.Component {
       />
     );
   }
-
+  
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -91,6 +96,9 @@ class ChatScreen extends React.Component {
             _id: 1
           }}
           renderBubble={this.renderBubble}
+          onLongPress={(ctx, currentMessage) => this.props.navigation.navigate('MsgSent', {
+              msg: currentMessage.text
+            })}
         />
         <KeyboardSpacer topSpacing={-50} />
       </View>

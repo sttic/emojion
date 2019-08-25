@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import DemoScreen from '../screens/DemoScreen';
 import ChatScreen from '../screens/ChatScreen';
+import MsgScreen from '../screens/MsgScreen';
 import TrendsScreen from '../screens/TrendsScreen';
 
 const config = Platform.select({
@@ -17,6 +18,7 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Chat: ChatScreen,
+    MsgSent: MsgScreen,
     Trends: TrendsScreen
   },
   config
