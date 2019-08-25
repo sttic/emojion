@@ -48,11 +48,12 @@ export default function MsgScreen(props) {
             Positive:{' '}
             {response
               ? Math.round(
-                  Number(
+                  (Number(
                     JSON.parse(response).textInterpretation.sentiment.positive
-                  ) * 100
+                  ) /
+                    1) * 10000
                 ) / 100
-              : null}
+              : null} %
           </Text>
           <ProgressBar
             progress={
@@ -68,11 +69,11 @@ export default function MsgScreen(props) {
             Negative:{' '}
             {response
               ? Math.round(
-                  Number(
-                    JSON.parse(response).textInterpretation.sentiment.positive
-                  ) * 100
+                  (Number(
+                    JSON.parse(response).textInterpretation.sentiment.negative
+                  ) / 1) * 10000
                 ) / 100
-              : null}
+              : null} %
           </Text>
           <ProgressBar
             progress={
@@ -88,11 +89,12 @@ export default function MsgScreen(props) {
             Neutral:{' '}
             {response
               ? Math.round(
-                  Number(
+                  (Number(
                     JSON.parse(response).textInterpretation.sentiment.neutral
-                  ) * 100
+                  ) /
+                    1) * 10000
                 ) / 100
-              : null}
+              : null} %
           </Text>
           <ProgressBar
             progress={
@@ -108,11 +110,12 @@ export default function MsgScreen(props) {
             Mixed:{' '}
             {response
               ? Math.round(
-                  Number(
+                  (Number(
                     JSON.parse(response).textInterpretation.sentiment.mixed
-                  ) * 100
+                  ) /
+                    1) * 10000
                 ) / 100
-              : null}
+              : null} %
           </Text>
           <ProgressBar
             progress={
