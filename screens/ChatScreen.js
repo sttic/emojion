@@ -1,11 +1,12 @@
-import React from "react";
-import { View } from "react-native";
-import { GiftedChat, Bubble } from "react-native-gifted-chat";
-import KeyboardSpacer from "react-native-keyboard-spacer";
-import Colors from "../constants/Colors";
+import React from 'react';
+import { Platform, View, TouchableOpacity } from 'react-native';
+import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+import Icon from 'react-native-vector-icons/Ionicons';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+import Colors from '../constants/Colors';
 
-import { connect } from "react-redux";
-import { sendMessage } from "../actions/actions";
+import { connect } from 'react-redux';
+import { sendMessage } from '../actions/actions';
 
 class ChatScreen extends React.Component {
   constructor(props) {
@@ -20,7 +21,23 @@ class ChatScreen extends React.Component {
 
   static navigationOptions({ navigation }) {
     return {
-      title: navigation.state.params.name
+      headerTitle: navigation.state.params.name,
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Trends')}
+        >
+          <Icon
+            name={
+              Platform.OS === 'ios'
+                ? 'ios-information-circle-outline'
+                : 'md-information-circle-outline'
+            }
+            size={28}
+            color='grey'
+            style={{ paddingRight: 16 }}
+          />
+        </TouchableOpacity>
+      )
     };
   }
 
@@ -57,7 +74,7 @@ class ChatScreen extends React.Component {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: "#4db8c7"
+            backgroundColor: Colors.primary
           }
         }}
       />
