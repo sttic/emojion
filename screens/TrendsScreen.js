@@ -1,109 +1,57 @@
-import React, { useState } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  TextInput
-} from 'react-native';
-import { Predictions } from 'aws-amplify';
+import React from 'react';
+import { Picker, View, Text } from 'react-native';
+import LineGraph from '../components/LineGraph';
 
-export default function TrendsScreen() {
-  const [response, setResponse] = useState('');
-  const [textToInterpret, setTextToInterpret] = useState(
-    'write some text here to interpret'
-  );
+export default class TrendsScreen extends React.Component {
+  constructor(props) {
+    super(props);
 
-  interpretFromPredictions = () => {
-    Predictions.interpret({
-      text: {
-        source: {
-          text: textToInterpret,
-          language: 'en'
-        },
-        type: 'SENTIMENT'
-      }
-    })
-      .then(result => setResponse(JSON.stringify(result, null, 2)))
-      .catch(err => setResponse(JSON.stringify(err, null, 2)));
-  };
+    this.state = {
+      options: [
+        { label: 'Daily', value: 'Daily' },
+        { label: 'Monthly', value: 'Monthly' },
+        { label: 'Yearly', value: 'Yearly' }
+      ],
+      period: undefined
+    };
+  }
 
-  setText = text => {
-    setTextToInterpret(text);
-  };
+  showGraph() {
+    switch (this.state.period) {
+      case 'Daily':
+        return undefined;
+      case 'Monthly':
+        return <LineGraph />;
+      case 'Yearly':
+        return <LineGraph />;
+    }
+  }
 
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      >
-        <View style={styles.welcomeContainer}>
-          <Text style={styles.title}>
-            How Amazon Comprehend works behind the screen!
-          </Text>
-          <TextInput
-            value={textToInterpret}
-            onChangeText={setText}
-            style={styles.input}
-          ></TextInput>
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={interpretFromPredictions}
-          >
-            <Text style={styles.buttonText}>ENTER</Text>
-          </TouchableOpacity>
-          <Text>{response}</Text>
-        </View>
-      </ScrollView>
-    </View>
-  );
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <Picker
+          selectedValue={this.state.period}
+          style={{
+            height: 50,
+            width: 200
+          }}
+          onValueChange={itemValue => this.setState({ period: itemValue })}
+        >
+          {this.state.options.map(option => (
+            <Picker.Item
+              key={option.value}
+              label={option.label}
+              value={option.value}
+            />
+          ))}
+        </Picker>
+        {this.showGraph()}
+      </View>
+    );
+  }
 }
 
 TrendsScreen.navigationOptions = {
-  title: 'Demo'
+  title: 'Trends'
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingHorizontal: 20
-  },
-  contentContainer: {
-    paddingTop: 80
-  },
-  welcomeContainer: {
-    marginTop: 10,
-    marginBottom: 20
-  },
-  title: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center'
-  },
-  input: {
-    height: 30,
-    color: '#000',
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#4dbed8',
-    marginTop: 30
-  },
-  buttonContainer: {
-    marginVertical: 20,
-    paddingTop: 10,
-    paddingBottom: 10,
-    backgroundColor: '#4dbed8',
-    borderRadius: 5,
-    width: 100,
-    alignSelf: 'center'
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: '#FFFFFF'
-  }
-});
