@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Predictions } from 'aws-amplify';
+import { ProgressBar } from 'react-native-paper';
 
 export default function MsgScreen(props) {
   const msg = props.navigation.getParam('msg');
 
   const [response, setResponse] = useState('');
   const [textToInterpret, setTextToInterpret] = useState(msg);
-  
+
   interpretFromPredictions = () => {
     Predictions.interpret({
       text: {
@@ -29,7 +25,7 @@ export default function MsgScreen(props) {
 
   setText = text => {
     setTextToInterpret(text);
-  };  
+  };
 
   interpretFromPredictions();
 
@@ -42,36 +38,92 @@ export default function MsgScreen(props) {
         <View style={styles.welcomeContainer}>
           <Text style={styles.title}>Your text:</Text>
           <Text style={styles.msg}>{msg}</Text>
-          <Text style={styles.title2}>
-            Predominant sentiment:{' '}
+          <Text style={styles.title2}>Predominant sentiment: </Text>
+          <Text style={styles.title3}>
             {response
               ? JSON.parse(response).textInterpretation.sentiment.predominant
-              : null}
+              : null}{' '}
           </Text>
           <Text>
-            positive:{' '}
+            Positive:{' '}
             {response
-              ? JSON.parse(response).textInterpretation.sentiment.positive
+              ? Math.round(
+                  Number(
+                    JSON.parse(response).textInterpretation.sentiment.positive
+                  ) * 100
+                ) / 100
               : null}
           </Text>
+          <ProgressBar
+            progress={
+              response
+                ? Number(
+                    JSON.parse(response).textInterpretation.sentiment.positive
+                  )
+                : null
+            }
+            color={'#4dbed8'}
+          />
           <Text>
-            negative:{' '}
+            Negative:{' '}
             {response
-              ? JSON.parse(response).textInterpretation.sentiment.negative
+              ? Math.round(
+                  Number(
+                    JSON.parse(response).textInterpretation.sentiment.positive
+                  ) * 100
+                ) / 100
               : null}
           </Text>
+          <ProgressBar
+            progress={
+              response
+                ? Number(
+                    JSON.parse(response).textInterpretation.sentiment.negative
+                  )
+                : null
+            }
+            color={'#4dbed8'}
+          />
           <Text>
-            neutral:{' '}
+            Neutral:{' '}
             {response
-              ? JSON.parse(response).textInterpretation.sentiment.neutral
+              ? Math.round(
+                  Number(
+                    JSON.parse(response).textInterpretation.sentiment.neutral
+                  ) * 100
+                ) / 100
               : null}
           </Text>
+          <ProgressBar
+            progress={
+              response
+                ? Number(
+                    JSON.parse(response).textInterpretation.sentiment.neutral
+                  )
+                : null
+            }
+            color={'#4dbed8'}
+          />
           <Text>
-            mixed:{' '}
+            Mixed:{' '}
             {response
-              ? JSON.parse(response).textInterpretation.sentiment.mixed
+              ? Math.round(
+                  Number(
+                    JSON.parse(response).textInterpretation.sentiment.mixed
+                  ) * 100
+                ) / 100
               : null}
           </Text>
+          <ProgressBar
+            progress={
+              response
+                ? Number(
+                    JSON.parse(response).textInterpretation.sentiment.mixed
+                  )
+                : null
+            }
+            color={'#4dbed8'}
+          />
         </View>
       </ScrollView>
     </View>
@@ -106,12 +158,17 @@ const styles = StyleSheet.create({
     color: 'rgba(96,100,109, 1)',
     lineHeight: 24,
     textAlign: 'center',
-    marginVertical: 10
+    marginTop: 15
+  },
+  title3: {
+    fontSize: 18,
+    lineHeight: 24,
+    textAlign: 'center',
+    marginBottom: 15
   },
   msg: {
     borderColor: '#4dbed8',
     borderWidth: 1,
-    
     padding: 5,
     marginVertical: 5,
     borderRadius: 5
