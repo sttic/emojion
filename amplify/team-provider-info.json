@@ -1,0 +1,19 @@
+{
+    "kms": {
+        "awscloudformation": {
+            "AuthRoleName": "emojion-kms-20190824153301-authRole",
+            "UnauthRoleArn": "arn:aws:iam::603227562736:role/emojion-kms-20190824153301-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::603227562736:role/emojion-kms-20190824153301-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "emojion-kms-20190824153301-deployment",
+            "UnauthRoleName": "emojion-kms-20190824153301-unauthRole",
+            "StackName": "emojion-kms-20190824153301",
+            "StackId": "arn:aws:cloudformation:us-east-1:603227562736:stack/emojion-kms-20190824153301/fceee950-c6a5-11e9-acad-12989ba5c57e"
+        },
+        "categories": {
+            "auth": {
+                "emojion323a3e0a": {}
+            }
+        }
+    }
+}
